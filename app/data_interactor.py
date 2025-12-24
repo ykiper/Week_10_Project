@@ -2,12 +2,11 @@ import mysql.connector
 from contact import Contact
 
 
-#write all in class sqlService
+
 def connect_to_db():
     conn = mysql.connector.connect(
         host='db',
         user="root",
-        # port=3306,
         password="1234",
         database='contacts_db')
 
@@ -47,13 +46,18 @@ def get_all_contacts():
     return contact_list
 
 
-def update_contact(id):
+def update_contact(id, connect_dict):
     conn = connect_to_db()
     cursor = conn.cursor()
-    query ="""UPDATE Customers
-SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
-WHERE CustomerID = 1;
+    query =f"""UPDATE contacts
+SET first_name = "{connect_dict['first_name']}", last_name = "{connect_dict['last_name']}", phone_number = "{connect_dict['phone_number']}" 
+WHERE id = {id};
     """
+    cursor.execute(query)
+    conn.commit()
+    conn.close()
+    return True
+
 
 def delete_contact(id):
     conn = connect_to_db()

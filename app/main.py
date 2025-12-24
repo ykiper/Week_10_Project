@@ -1,4 +1,4 @@
-from data_interactor import create_contact, get_all_contacts, delete_contact
+from data_interactor import create_contact, get_all_contacts, delete_contact, update_contact
 from fastapi import FastAPI
 from pydantic import BaseModel
 import json
@@ -22,9 +22,10 @@ def create_contact_API(item: Item):
     return create_contact(item.first_name, item.last_name, item.phone_number)
 
 
-# @app.put("/contacts/{id}")
-# def update_contact_API(it: int, item: Item)):
-#     return
+@app.put("/contacts/{id}")
+def update_contact_API(id: int, item: Item):
+    contact_dict = {'first_name': item.first_name, 'last_name': item.last_name, 'phone_number': item.phone_number}
+    return update_contact(id,contact_dict)
 
 
 @app.delete("/contacts/{id}")
