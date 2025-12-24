@@ -5,10 +5,10 @@ from contact import Contact
 #write all in class sqlService
 def connect_to_db():
     conn = mysql.connector.connect(
-        host='127.0.0.1',
+        host='db',
         user="root",
-        port=3307,
-        password="",
+        # port=3306,
+        password="1234",
         database='contacts_db')
 
     return conn
@@ -48,7 +48,12 @@ def get_all_contacts():
 
 
 def update_contact(id):
-    pass
+    conn = connect_to_db()
+    cursor = conn.cursor()
+    query ="""UPDATE Customers
+SET ContactName = 'Alfred Schmidt', City = 'Frankfurt'
+WHERE CustomerID = 1;
+    """
 
 def delete_contact(id):
     conn = connect_to_db()

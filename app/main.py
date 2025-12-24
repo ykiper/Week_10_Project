@@ -22,9 +22,9 @@ def create_contact_API(item: Item):
     return create_contact(item.first_name, item.last_name, item.phone_number)
 
 
-@app.put("/contacts/{id}")
-def update_contact_API(it: int, item: Item)):
-    return
+# @app.put("/contacts/{id}")
+# def update_contact_API(it: int, item: Item)):
+#     return
 
 
 @app.delete("/contacts/{id}")
